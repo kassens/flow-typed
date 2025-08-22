@@ -1612,12 +1612,14 @@ declare class Request {
 declare function fetch(input: RequestInfo, init?: RequestOptions): Promise<Response>;
 
 
-type TextEncoder$availableEncodings = 'utf-8' | 'utf8' | 'unicode-1-1-utf-8' | 'utf-16be' | 'utf-16' | 'utf-16le';
-
 declare class TextEncoder {
-  constructor(encoding?: TextEncoder$availableEncodings): void;
-  encode(buffer: string, options?: { stream: boolean, ... }): Uint8Array;
-  encoding: TextEncoder$availableEncodings;
+  constructor(): void;
+  encode(input: string): Uint8Array;
+  encodeInto(
+    input: string,
+    buffer: Uint8Array,
+  ): {written: number, read: number};
+  +encoding: 'utf-8';
 }
 
 type TextDecoder$availableEncodings =
